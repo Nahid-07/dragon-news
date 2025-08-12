@@ -1,28 +1,27 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Menu, X, User } from "lucide-react";
-import { Link } from "react-router";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <nav className="fixed w-full z-50">
-      <div className="w-11/12 mx-auto">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           {/* Left Side - Empty */}
           <div className="w-20"></div>
 
           {/* Center Menu - Desktop */}
-          <div className="hidden md:flex space-x-8 text-gray-500 text-lg">
-            <Link href="#home" className="hover:text-blue-500">
+          <div className="hidden md:flex space-x-8 text-gray-800 font-medium">
+            <a href="#home" className="hover:text-blue-500">
               Home
-            </Link>
-            <Link href="#about" className="hover:text-blue-500">
+            </a>
+            <a href="#about" className="hover:text-blue-500">
               About
-            </Link>
-            <Link href="#career" className="hover:text-blue-500">
+            </a>
+            <a href="#career" className="hover:text-blue-500">
               Career
-            </Link>
+            </a>
           </div>
 
           {/* Right Side - Profile & Login */}
@@ -53,15 +52,15 @@ export default function Navbar() {
       {isOpen && (
         <div className="md:hidden bg-white shadow-lg border-t">
           <div className="px-4 py-3 space-y-2 text-gray-700 font-medium">
-            <Link href="#home" className="block hover:text-blue-500">
+            <a href="#home" className="block hover:text-blue-500">
               Home
-            </Link>
-            <Link href="#about" className="block hover:text-blue-500">
+            </a>
+            <a href="#about" className="block hover:text-blue-500">
               About
-            </Link>
-            <Link href="#career" className="block hover:text-blue-500">
+            </a>
+            <a href="#career" className="block hover:text-blue-500">
               Career
-            </Link>
+            </a>
           </div>
         </div>
       )}
