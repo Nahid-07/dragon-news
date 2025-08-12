@@ -1,10 +1,11 @@
 import { CiBookmark, CiShare2 } from "react-icons/ci";
-
+import { GoStarFill } from "react-icons/go";
+import { FaRegEye } from "react-icons/fa6";
 export const NewsCard = ({ singleNews }) => {
   console.log(singleNews);
   return (
     <div>
-        {/* author information */}
+      {/* author information */}
       <div className="bg-gray-50 flex justify-between items-center p-3">
         <div className="flex items-center">
           <img
@@ -14,7 +15,9 @@ export const NewsCard = ({ singleNews }) => {
           />
           <div>
             <p>{singleNews.author.name}</p>
-            <p className="text-sm text-gray-300">{singleNews.author.published_date}</p>
+            <p className="text-sm text-gray-400">
+              {singleNews.author.published_date}
+            </p>
           </div>
         </div>
 
@@ -24,16 +27,30 @@ export const NewsCard = ({ singleNews }) => {
         </div>
       </div>
       {/* news details */}
-      <div>
+      <div className="my-5">
         <p className="text-xl font-semibold">{singleNews.title}</p>
-        <div>
-            <img src={singleNews.image_url} alt="" />
+        <div className="my-3">
+          <img src={singleNews.image_url} alt="" />
         </div>
         <p>
-            {singleNews.details}
+          {singleNews.details.slice(1, 250)}
+          <button className="text-orange-500 ml-2 font-semibold">
+            Read more
+          </button>
         </p>
-        <div>
-            
+        <hr className="my-3 text-gray-400" />
+        <div className="flex justify-between ">
+          <div className="flex items-center gap-2">
+            <GoStarFill className="text-yellow-500" />
+            <GoStarFill className="text-yellow-500" />
+            <GoStarFill className="text-yellow-500" />
+            <GoStarFill className="text-yellow-500" />
+            <span>{singleNews.rating.number}</span>
+          </div>
+          <div className="flex gap-2 items-center">
+            <FaRegEye />
+            {singleNews.total_view}
+          </div>
         </div>
       </div>
     </div>
