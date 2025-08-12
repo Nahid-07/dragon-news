@@ -7,7 +7,7 @@ export default function Navbar() {
 
   return (
     <nav className="fixed w-full z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-11/12 mx-auto">
         <div className="flex justify-between h-16 items-center">
           {/* Left Side - Empty */}
           <div className="w-20"></div>
