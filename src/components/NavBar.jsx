@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Menu, X, User } from "lucide-react";
+import { Link } from "react-router";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <nav className="w-full z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-11/12 mx-auto">
         <div className="flex justify-between h-16 items-center">
           {/* Left Side - Empty */}
           <div className="w-20"></div>
@@ -27,9 +28,9 @@ export default function Navbar() {
           {/* Right Side - Profile & Login */}
           <div className="flex items-center gap-3">
             <User className="w-6 h-6 text-gray-700" />
-            <button className="px-4 py-1 border border-blue-500 text-blue-500 rounded-lg hover:bg-blue-500 hover:text-white transition">
+            <Link to={'/auth/login'} className="px-4 py-1 border border-blue-500 text-blue-500 rounded-lg hover:bg-blue-500 hover:text-white transition">
               Login
-            </button>
+            </Link>
 
             {/* Mobile Menu Button */}
             <div className="md:hidden">
