@@ -2,7 +2,6 @@ import { CiBookmark, CiShare2 } from "react-icons/ci";
 import { GoStarFill } from "react-icons/go";
 import { FaRegEye } from "react-icons/fa6";
 export const NewsCard = ({ singleNews }) => {
-  console.log(singleNews);
   return (
     <div>
       {/* author information */}

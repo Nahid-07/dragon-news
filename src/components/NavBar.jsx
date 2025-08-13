@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Menu, X, User } from "lucide-react";
 import { Link } from "react-router";
 
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -14,15 +15,15 @@ export default function Navbar() {
 
           {/* Center Menu - Desktop */}
           <div className="hidden md:flex space-x-8 text-gray-800 font-medium">
-            <a href="#home" className="hover:text-blue-500">
+            <Link to={'/'} className="hover:text-blue-500">
               Home
-            </a>
-            <a href="#about" className="hover:text-blue-500">
+            </Link>
+            <Link href="#about" className="hover:text-blue-500">
               About
-            </a>
-            <a href="#career" className="hover:text-blue-500">
+            </Link>
+            <Link href="#career" className="hover:text-blue-500">
               Career
-            </a>
+            </Link>
           </div>
 
           {/* Right Side - Profile & Login */}
@@ -53,15 +54,15 @@ export default function Navbar() {
       {isOpen && (
         <div className="md:hidden bg-white shadow-lg border-t">
           <div className="px-4 py-3 space-y-2 text-gray-700 font-medium">
-            <a href="#home" className="block hover:text-blue-500">
+            <Link href="#home" className="block hover:text-blue-500">
               Home
-            </a>
-            <a href="#about" className="block hover:text-blue-500">
+            </Link>
+            <Link href="#about" className="block hover:text-blue-500">
               About
-            </a>
-            <a href="#career" className="block hover:text-blue-500">
+            </Link>
+            <Link href="#career" className="block hover:text-blue-500">
               Career
-            </a>
+            </Link>
           </div>
         </div>
       )}
