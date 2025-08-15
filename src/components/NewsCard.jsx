@@ -30,7 +30,7 @@ export const NewsCard = ({ singleNews }) => {
       <div className="my-5">
         <p className="text-xl font-semibold">{singleNews.title}</p>
         <div className="my-3">
-          <img src={singleNews.image_url} alt="" />
+          <img className="w-full" src={singleNews.image_url} alt="" />
         </div>
         <p>
           {singleNews.details.slice(1, 250)}
