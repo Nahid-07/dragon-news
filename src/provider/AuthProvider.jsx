@@ -1,8 +1,6 @@
 import { useState } from "react"
 import { AuthContext } from "./Context"
 
-const ContextApi = AuthContext
-
 export const AuthProvider = ({children}) => {
     const [user, setUser] = useState({
         name: "Asif"
@@ -13,8 +11,8 @@ export const AuthProvider = ({children}) => {
     }
 
       return (
-    <ContextApi.Provider value={authInfo}>
+    <AuthContext.Provider value={authInfo}>
         {children}
-    </ContextApi.Provider>
+    </AuthContext.Provider>
   )
 }
