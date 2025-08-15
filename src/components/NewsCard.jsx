@@ -1,6 +1,7 @@
 import { CiBookmark, CiShare2 } from "react-icons/ci";
 import { GoStarFill } from "react-icons/go";
 import { FaRegEye } from "react-icons/fa6";
+import { Link } from "react-router";
 export const NewsCard = ({ singleNews }) => {
   return (
     <div>
@@ -33,9 +34,9 @@ export const NewsCard = ({ singleNews }) => {
         </div>
         <p>
           {singleNews.details.slice(1, 250)}
-          <button className="text-orange-500 ml-2 font-semibold">
+          <Link to={`/news/details/${singleNews._id}`} className="text-orange-500 ml-2 font-semibold">
             Read more
-          </button>
+          </Link>
         </p>
         <hr className="my-3 text-gray-400" />
         <div className="flex justify-between ">
