@@ -1,6 +1,7 @@
-import { createContext, useState } from "react"
+import { useState } from "react"
+import { AuthContext } from "./Context"
 
-export const AuthContext = createContext();
+const ContextApi = AuthContext
 
 export const AuthProvider = ({children}) => {
     const [user, setUser] = useState({
@@ -12,8 +13,8 @@ export const AuthProvider = ({children}) => {
     }
 
       return (
-    <AuthContext.Provider value={authInfo}>
+    <ContextApi.Provider value={authInfo}>
         {children}
-    </AuthContext.Provider>
+    </ContextApi.Provider>
   )
 }
