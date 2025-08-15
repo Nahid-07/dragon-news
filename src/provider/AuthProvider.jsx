@@ -4,6 +4,8 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
 
@@ -11,11 +13,12 @@ const auth = getAuth(app);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  console.log(user)
   // create user with email and password
   const createUserWithEmail = (email, password) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((result) => {
-        setUser(result.user);
+        // setUser(result.user);
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -23,12 +26,22 @@ export const AuthProvider = ({ children }) => {
         console.log(errorCode, errorMessage);
       });
   };
-  const authInfo = {
-    user,
-    setUser,
-    createUserWithEmail,
-  };
-
+  // log out function
+  const logOut = ()=>{
+    return signOut(auth)
+  }
+  // login function 
+  const logInUserWithEmail = (email, password)=>{
+    signInWithEmailAndPassword(auth,email,password)
+    .then(result => {
+      console.log(result)
+    }).catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorCode,errorMessage)
+  });
+  }
+  // observer function
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -37,6 +50,13 @@ export const AuthProvider = ({ children }) => {
       unsubscribe();
     };
   }, []);
+  const authInfo = {
+    user,
+    setUser,
+    createUserWithEmail,
+    logOut,
+    logInUserWithEmail
+  };
 
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

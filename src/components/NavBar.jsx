@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Menu, X, User } from "lucide-react";
 import { Link } from "react-router";
-
+import { AuthContext } from "../provider/Context";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, logOut,logInUserWithEmail } = useContext(AuthContext);
 
   return (
     <nav className="w-full z-50">
@@ -15,7 +16,7 @@ export default function Navbar() {
 
           {/* Center Menu - Desktop */}
           <div className="hidden md:flex space-x-8 text-gray-800 font-medium">
-            <Link to={'/'} className="hover:text-blue-500">
+            <Link to={"/"} className="hover:text-blue-500">
               Home
             </Link>
             <Link href="#about" className="hover:text-blue-500">
@@ -29,9 +30,21 @@ export default function Navbar() {
           {/* Right Side - Profile & Login */}
           <div className="flex items-center gap-3">
             <User className="w-6 h-6 text-gray-700" />
-            <Link to={'/auth/login'} className="px-4 py-1 border border-blue-500 text-blue-500 rounded-lg hover:bg-blue-500 hover:text-white transition">
-              Login
-            </Link>
+            {user && user?.email ? (
+              <button
+                onClick={() => logOut()}
+                className="px-4 py-1 border border-blue-500 text-blue-500 rounded-lg hover:bg-blue-500 hover:text-white transition"
+              >
+                Log out
+              </button>
+            ) : (
+              <Link
+                to={"/auth/login"}
+                className="px-4 py-1 border border-blue-500 text-blue-500 rounded-lg hover:bg-blue-500 hover:text-white transition"
+              >
+                Login
+              </Link>
+            )}
 
             {/* Mobile Menu Button */}
             <div className="md:hidden">
