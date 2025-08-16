@@ -1,11 +1,12 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../provider/Context";
 
 export const Login = () => {
   const { logInUserWithEmail, setUser } = useContext(AuthContext);
   const location = useLocation();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [error, setError] = useState({})
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -17,7 +18,7 @@ export const Login = () => {
       navigate(location?.state ? location.state : '/')
 
     }).catch(err =>{
-      console.log(err)
+      setError({...err, errorMessage : err.code})
     })
   };
   return (
@@ -52,7 +53,10 @@ export const Login = () => {
               className="w-full px-4 py-3 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400"
             />
           </div>
-
+          {/* error message show here */}
+          {
+            error && <p>{error.errorMessage}</p>
+          }
           {/* Login Button */}
           <button
             type="submit"
