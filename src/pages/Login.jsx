@@ -1,15 +1,24 @@
 import { useContext } from "react";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../provider/Context";
 
 export const Login = () => {
-  const { logInUserWithEmail } = useContext(AuthContext);
+  const { logInUserWithEmail, setUser } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate()
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    logInUserWithEmail(email, password);
+    logInUserWithEmail(email, password)
+    .then(result => {
+      setUser(result.user);
+      navigate(location?.state ? location.state : '/')
+
+    }).catch(err =>{
+      console.log(err)
+    })
   };
   return (
     <div className="flex items-center justify-center h-screen -mt-24">

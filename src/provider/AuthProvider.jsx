@@ -13,13 +13,14 @@ const auth = getAuth(app);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true)
-  console.log(user)
+  const [loading, setLoading] = useState(true);
+
+  console.log(user);
   // create user with email and password
   const createUserWithEmail = (email, password) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((result) => {
-        setLoading(true)
+        setLoading(true);
         setUser(result.user);
       })
       .catch((error) => {
@@ -29,26 +30,20 @@ export const AuthProvider = ({ children }) => {
       });
   };
   // log out function
-  const logOut = ()=>{
+  const logOut = () => {
+    setLoading(true);
+    return signOut(auth);
+  };
+  // login function
+  const logInUserWithEmail = (email, password) => {
     setLoading(true)
-    return signOut(auth)
-  }
-  // login function 
-  const logInUserWithEmail = (email, password)=>{
-    signInWithEmailAndPassword(auth,email,password)
-    .then(() => {
-      setLoading(true)
-    }).catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorCode,errorMessage)
-  });
-  }
+    return signInWithEmailAndPassword(auth, email, password);
+  };
   // observer function
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoading(false)
+      setLoading(false);
     });
     return () => {
       unsubscribe();
@@ -60,7 +55,7 @@ export const AuthProvider = ({ children }) => {
     createUserWithEmail,
     logOut,
     logInUserWithEmail,
-    loading
+    loading,
   };
 
   return (
