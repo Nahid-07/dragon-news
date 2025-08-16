@@ -1,6 +1,7 @@
 import { Link, useLoaderData } from "react-router"
 import { Header } from "../components/Header"
 import { RightNavbar } from "../components/layout-components/RightNavbar"
+import Navbar from "../components/NavBar";
 
 
 export const NewsDetails = () => {
@@ -10,6 +11,7 @@ export const NewsDetails = () => {
     <div>
         <header>
             <Header></Header>
+            <Navbar></Navbar>
         </header>
         <main className="w-11/12 mx-auto md:grid grid-cols-12 gap-5 my-10">
             <section className="col-span-9">

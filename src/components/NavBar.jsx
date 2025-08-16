@@ -5,14 +5,14 @@ import { AuthContext } from "../provider/Context";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, logOut,logInUserWithEmail } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
 
   return (
     <nav className="w-full z-50">
       <div className="w-11/12 mx-auto">
         <div className="flex justify-between h-16 items-center">
           {/* Left Side - Empty */}
-          <div className="w-20"></div>
+          <div className="w-20">{user?.email}</div>
 
           {/* Center Menu - Desktop */}
           <div className="hidden md:flex space-x-8 text-gray-800 font-medium">

@@ -13,12 +13,14 @@ const auth = getAuth(app);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true)
   console.log(user)
   // create user with email and password
   const createUserWithEmail = (email, password) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((result) => {
-        // setUser(result.user);
+        setLoading(true)
+        setUser(result.user);
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -28,13 +30,14 @@ export const AuthProvider = ({ children }) => {
   };
   // log out function
   const logOut = ()=>{
+    setLoading(true)
     return signOut(auth)
   }
   // login function 
   const logInUserWithEmail = (email, password)=>{
     signInWithEmailAndPassword(auth,email,password)
-    .then(result => {
-      console.log(result)
+    .then(() => {
+      setLoading(true)
     }).catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
@@ -45,6 +48,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      setLoading(false)
     });
     return () => {
       unsubscribe();
@@ -55,7 +59,8 @@ export const AuthProvider = ({ children }) => {
     setUser,
     createUserWithEmail,
     logOut,
-    logInUserWithEmail
+    logInUserWithEmail,
+    loading
   };
 
   return (
