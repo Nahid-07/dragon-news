@@ -1,25 +1,28 @@
 import React, { useContext } from "react";
-import { Link } from "react-router";
+import { Link, Navigate, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../provider/Context";
 
 export const Register = () => {
-  const {createUserWithEmail} = useContext(AuthContext)
-  const handleRegister = (event)=>{
+  const { createUserWithEmail, setUser, updateUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const handleRegister = (event) => {
     event.preventDefault();
     const form = event.target;
     const name = form.name.value;
     const photo = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
-    const registerInfomation = {
-      name : name,
-      photo: photo,
-      email: email,
-      password: password
-
-    }
-    createUserWithEmail(registerInfomation.email, registerInfomation.password)
-  }
+    createUserWithEmail(email, password)
+      .then((result) => {
+        updateUser({
+          displayName: name,
+          photoURL: photo,
+        }).then(() => {
+          setUser(result.user);
+          navigate("/");
+        });
+      })
+  };
   return (
     <div className="flex items-center justify-center h-screen -mt-24">
       <div className="bg-white p-8 rounded-lg lg:w-4/12 md:w-8/12 w-11/12">
@@ -61,7 +64,7 @@ export const Register = () => {
               className="w-full px-4 py-3 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400"
             />
           </div>
-        {/* password */}
+          {/* password */}
           <div>
             <label className="block text-sm font-semibold mb-2">Password</label>
             <input

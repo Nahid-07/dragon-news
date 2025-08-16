@@ -12,7 +12,7 @@ export default function Navbar() {
       <div className="w-11/12 mx-auto">
         <div className="flex justify-between h-16 items-center">
           {/* Left Side - Empty */}
-          <div className="w-20">{user?.email}</div>
+          <div className="w-20 whitespace-nowrap font-bold">{user?.displayName}</div>
 
           {/* Center Menu - Desktop */}
           <div className="hidden md:flex space-x-8 text-gray-800 font-medium">
@@ -26,10 +26,11 @@ export default function Navbar() {
               Career
             </Link>
           </div>
-
           {/* Right Side - Profile & Login */}
           <div className="flex items-center gap-3">
-            <User className="w-6 h-6 text-gray-700" />
+            {
+              user?.photoURL ? <img className="w-10 h-10 text-gray-700 rounded-full" src={user?.photoURL} alt="user image" /> : <User className="w-6 h-6 text-gray-700" />
+            }
             {user && user?.email ? (
               <button
                 onClick={() => logOut()}
